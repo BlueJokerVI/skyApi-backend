@@ -1,0 +1,93 @@
+spring:
+  profiles:
+    #运行的环境
+    active: test
+  application:
+    name: skyapi
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER  #knif4j处理使用
+  datasource:
+    url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${skyapi.mysql.username}
+    password: ${skyapi.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    # Redis服务器地址
+    host: ${skyapi.redis.host}
+    # Redis服务器端口号
+    port: ${skyapi.redis.port}
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    # 设置密码
+    password: ${skyapi.redis.password}
+  # 使用redis实现分布是session
+  session:
+    store-type: none
+    timeout: 2592000 #30天过期
+  jackson:
+    # 配置Date类型序列化格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#  shardingsphere:
+#    #数据源配置
+#    datasource:
+#      # 多数据源以逗号隔开即可
+#      names: skyapi
+#      skyapi:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        jdbc-url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#        username: ${skyapi.mysql.username}
+#        password: ${skyapi.mysql.password}
+    # 规则配置
+    rules:
+      sharding:
+        # 分片算法配置
+        sharding-algorithms:
+          # 自定义分片规则名
+          answer-table-inline:
+            ## inline 类型是简单的配置文件里面就能写的类型，其他还有自定义类等等
+            type: INLINE
+            props:
+              algorithm-expression: user_answer_$->{app_id % 3}
+        tables:
+          user_answer:
+            actual-data-nodes: skyapi.user_answer_$->{0..1}
+            # 分表策略
+            table-strategy:
+              standard:
+                sharding-column: app_id
+                sharding-algorithm-name: answer-table-inline
+server:
+  address: 0.0.0.0
+  port: 8101
+  servlet:
+    # 所有请求加上api前缀
+    context-path: /api
+    # cookie 30 天过期
+    session:
+      cookie:
+        max-age: 2592000
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+# JWT 密钥
+jwt:
+  secret: ${skyapi.jwt.secret}
+
+# 对象存储
+oss:
+  enabled: ${skyapi.oss.enabled}
+  type: ${skyapi.oss.type}
+  endpoint: ${skyapi.oss.endpoint}
+  accessKey: ${skyapi.oss.accessKey}
+  secretKey: ${skyapi.oss.secretKey}
+  bucketName: ${skyapi.oss.bucketName}
+
+# AI调用
+ai:
+  apiSecretKey: ${skyapi.ai.apiSecretKey}
