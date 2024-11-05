@@ -2,6 +2,7 @@ package com.cct.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
+import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import com.cct.skyapibackend.user.domain.entity.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -25,17 +26,17 @@ public class Generator {
 
 
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("UserAnswer");
+        dataModel.setModelName("InterfaceInfo");
         dataModel.setAuthor("cct");
-        dataModel.setModelDesc("用户答题记录表");
-        dataModel.setModuleClassPath("com.cct.skyapibackend.useranswer");
+        dataModel.setModelDesc("接口信息表");
+        dataModel.setModuleClassPath("com.cct.skyapibackend.interfaceinfo");
         dataModel.setProjectPath("com.cct.skyapibackend");
-        String inputPathDir = "E:\\000_springboot后台开发模板\\skyapibackend\\src\\main\\resources\\templates";
-        String outputPathDir = "E:\\000_springboot后台开发模板\\skyapibackend\\src\\main\\java\\com\\cct\\skyapibackend\\" + dataModel.getModelName().toLowerCase();
+        String inputPathDir = "E:\\014_SkyApi\\skyApi-backend\\src\\main\\resources\\templates";
+        String outputPathDir = "E:\\014_SkyApi\\skyApi-backend\\src\\main\\java\\com\\cct\\skyapibackend\\" + dataModel.getModelName().toLowerCase();
 //        String outputPathDir = "E:\\000_springboot后台开发模板\\skyapibackend\\src\\test\\java\\com\\cct\\generator\\test";
 
 
-        Class<User> Clazz = User.class;
+        Class<InterfaceInfo> Clazz = InterfaceInfo.class;
         Field[] fields = Clazz.getDeclaredFields();
         List<DataModel.Field> fieldArrayList = new ArrayList<>();
         for (Field field : fields) {
@@ -63,6 +64,8 @@ public class Generator {
             System.out.println(outputPath);
             doGenerate(inputPath, outputPath, dataModel);
         }
+
+        System.out.println("完成");
     }
 
     public static  String getOutputPath(String outputPathDir,String inputPath, DataModel dataModel) {

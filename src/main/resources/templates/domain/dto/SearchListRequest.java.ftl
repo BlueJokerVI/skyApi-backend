@@ -37,7 +37,7 @@ public class Search${modelName}ListRequest extends BasePageReq implements Serial
 
     @Override
     public Page<${modelName}> plusPage() {
-        return new Page<>();
+        return new Page<>(getCurrent(),getPageSize());
     }
 
     private static final long serialVersionUID = 1L;
