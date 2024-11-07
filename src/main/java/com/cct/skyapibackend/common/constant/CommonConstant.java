@@ -33,9 +33,9 @@ public interface CommonConstant {
     /**
      * accessToken的过期时间，10分钟过期
      */
-    DateField ACCESS_TOKEN_EXPIRE_DATEFIELD = DateField.SECOND;
-    TimeUnit ACCESS_TOKEN_EXPIRE_TIMEUNIT = TimeUnit.SECONDS;
-    int ACCESS_TOKEN_EXPIRE_OFFSET = 30;
+    DateField ACCESS_TOKEN_EXPIRE_DATEFIELD = DateField.MINUTE;
+    TimeUnit ACCESS_TOKEN_EXPIRE_TIMEUNIT = TimeUnit.MINUTES;
+    int ACCESS_TOKEN_EXPIRE_OFFSET = 7;
 
 
 

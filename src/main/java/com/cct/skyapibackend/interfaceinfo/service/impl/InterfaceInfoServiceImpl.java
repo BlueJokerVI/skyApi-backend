@@ -12,10 +12,10 @@ import com.cct.skyapibackend.common.utils.RespUtils;
 import com.cct.skyapibackend.common.utils.ThrowUtils;
 import com.cct.skyapibackend.interfaceinfo.dao.InterfaceInfoDao;
 import com.cct.skyapibackend.interfaceinfo.dao.mapper.InterfaceInfoMapper;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.AddInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoListRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.UpdateInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import com.cct.skyapibackend.interfaceinfo.domain.enums.InterfaceStatusEnum;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
@@ -55,7 +55,7 @@ public class InterfaceInfoServiceImpl implements InterfaceInfoService {
         ThrowUtils.throwIf(existed == null, RespCodeEnum.PARAMS_ERROR, "接口创建者不存在");
 
         //2.保存接口信息
-        interfaceInfo.setStatus(InterfaceStatusEnum.RUN.getCode());
+        interfaceInfo.setStatus(InterfaceStatusEnum.STOP.getCode());
         ThrowUtils.throwIf(!interfaceInfoDao.save(interfaceInfo), RespCodeEnum.OPERATION_ERROR, "添加接口信息失败");
         return RespUtils.success(InterfaceInfoVo.toVo(interfaceInfo));
     }
@@ -100,5 +100,29 @@ public class InterfaceInfoServiceImpl implements InterfaceInfoService {
         Page<InterfaceInfo> interfaceInfoPage = interfaceInfoMapper.selectPage(searchInterfaceInfoListRequest.plusPage(), wrapper);
         BasePageResp<InterfaceInfo> basePageResp = BasePageResp.init(interfaceInfoPage);
         return RespUtils.success(basePageResp.toVo(basePageResp, InterfaceInfoVo.class));
+    }
+
+    @Override
+    public BaseResponse<Void> onlineInterfaceInfo(Long interfaceInfoId) {
+        //1.接口是否存在
+        InterfaceInfo existed = interfaceInfoDao.getById(interfaceInfoId);
+        ThrowUtils.throwIf(existed == null, RespCodeEnum.PARAMS_ERROR, "接口不存在");
+
+        //2.更新接口状态
+        existed.setStatus(InterfaceStatusEnum.RUN.getCode());
+        ThrowUtils.throwIf(!interfaceInfoDao.updateById(existed), RespCodeEnum.OPERATION_ERROR, "接口上线失败");
+        return RespUtils.success();
+    }
+
+    @Override
+    public BaseResponse<Void> offlineInterfaceInfo(Long interfaceInfoId) {
+        //1.接口是否存在
+        InterfaceInfo existed = interfaceInfoDao.getById(interfaceInfoId);
+        ThrowUtils.throwIf(existed == null, RespCodeEnum.PARAMS_ERROR, "接口不存在");
+
+        //2.更新接口状态
+        existed.setStatus(InterfaceStatusEnum.STOP.getCode());
+        ThrowUtils.throwIf(!interfaceInfoDao.updateById(existed), RespCodeEnum.OPERATION_ERROR, "接口下线失败");
+        return RespUtils.success();
     }
 }

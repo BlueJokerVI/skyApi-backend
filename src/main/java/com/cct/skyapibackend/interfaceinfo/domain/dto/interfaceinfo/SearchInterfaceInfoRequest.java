@@ -1,23 +1,22 @@
-package com.cct.skyapibackend.interfaceinfo.domain.dto;
-
+package com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo;
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cct.skyapibackend.common.domain.dto.BasePageReq;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
 import java.lang.Integer;
 import java.util.Date;
 /**
-* @description 接口信息表分页查询请求
+* @description 接口信息表查询请求
 * @author cct
 */
 @Data
-public class SearchInterfaceInfoListRequest extends BasePageReq implements Serializable {
-
+public class SearchInterfaceInfoRequest implements Serializable {
 
     @ApiModelProperty(value = "接口id")
     private Long id;
@@ -54,11 +53,6 @@ public class SearchInterfaceInfoListRequest extends BasePageReq implements Seria
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         BeanUtil.copyProperties(this,interfaceInfo);
         return interfaceInfo;
-    }
-
-    @Override
-    public Page<InterfaceInfo> plusPage() {
-        return new Page<>(getCurrent(),getPageSize());
     }
 
     private static final long serialVersionUID = 1L;

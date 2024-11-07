@@ -29,4 +29,30 @@
         secret_key,union_id,mp_open_id,
         create_time,update_time,is_delete
     </sql>
+    <select id="getUserList" resultType="com.cct.skyapibackend.user.domain.entity.User">
+        select * from `user`
+        <where>
+            <if test="getUserListRequest.id != null">
+                AND id = #{getUserListRequest.id}
+            </if>
+            <if test="getUserListRequest.name != null and getUserListRequest.name != ''">
+                AND name = #{getUserListRequest.name}
+            </if>
+            <if test="getUserListRequest.account != null and getUserListRequest.account != ''">
+                AND account = #{getUserListRequest.account}
+            </if>
+            <if test="getUserListRequest.gender != null">
+                AND gender = #{getUserListRequest.gender}
+            </if>
+            <if test="getUserListRequest.userRole != null">
+                AND userRole = #{getUserListRequest.userRole}
+            </if>
+            <if test="getUserListRequest.unionId != null and getUserListRequest.unionId != ''">
+                AND unionId = #{getUserListRequest.unionId}
+            </if>
+            <if test="getUserListRequest.updateTime != null">
+                AND updateTime >= #{getUserListRequest.updateTime}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.cct.skyapibackend.common.service;
+package com.cct.skyapibackend.common.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

@@ -2,10 +2,10 @@ package com.cct.skyapibackend.interfaceinfo.service;
 
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
 import com.cct.skyapibackend.common.domain.vo.BaseResponse;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.AddInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoListRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.UpdateInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
 
 /**
@@ -48,4 +48,18 @@ public interface InterfaceInfoService {
      * @return
      */
     BaseResponse<BasePageResp<InterfaceInfoVo>> searchInterfaceInfoPage(SearchInterfaceInfoListRequest searchInterfaceInfoListRequest);
+
+    /**
+     * 接口上线
+     * @param interfaceInfoId
+     * @return
+     */
+    BaseResponse<Void> onlineInterfaceInfo(Long interfaceInfoId);
+
+    /**
+     * 接口下线
+     * @param interfaceInfoId
+     * @return
+     */
+    BaseResponse<Void> offlineInterfaceInfo(Long interfaceInfoId);
 }

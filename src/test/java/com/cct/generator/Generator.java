@@ -2,8 +2,7 @@ package com.cct.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
-import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
-import com.cct.skyapibackend.user.domain.entity.User;
+import com.cct.skyapibackend.interfaceinfo.domain.entity.UserInterfaceInfo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -26,22 +25,22 @@ public class Generator {
 
 
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("InterfaceInfo");
+        dataModel.setModelName("UserInterfaceInfo");
         dataModel.setAuthor("cct");
-        dataModel.setModelDesc("接口信息表");
+        dataModel.setModelDesc("用户调用接口信息关系表");
         dataModel.setModuleClassPath("com.cct.skyapibackend.interfaceinfo");
         dataModel.setProjectPath("com.cct.skyapibackend");
         String inputPathDir = "E:\\014_SkyApi\\skyApi-backend\\src\\main\\resources\\templates";
-        String outputPathDir = "E:\\014_SkyApi\\skyApi-backend\\src\\main\\java\\com\\cct\\skyapibackend\\" + dataModel.getModelName().toLowerCase();
+        String outputPathDir = "E:\\014_SkyApi\\skyApi-backend\\src\\main\\java\\com\\cct\\skyapibackend\\" + dataModel.moduleClassPath.substring(dataModel.moduleClassPath.lastIndexOf('.') + 1);
 //        String outputPathDir = "E:\\000_springboot后台开发模板\\skyapibackend\\src\\test\\java\\com\\cct\\generator\\test";
 
 
-        Class<InterfaceInfo> Clazz = InterfaceInfo.class;
+        Class<UserInterfaceInfo> Clazz = UserInterfaceInfo.class;
         Field[] fields = Clazz.getDeclaredFields();
         List<DataModel.Field> fieldArrayList = new ArrayList<>();
         for (Field field : fields) {
             //跳过设置序列化id
-            if(field.getName().equals("serialVersionUID")) {
+            if (field.getName().equals("serialVersionUID")) {
                 continue;
             }
             DataModel.Field tmp = new DataModel.Field();
@@ -68,10 +67,10 @@ public class Generator {
         System.out.println("完成");
     }
 
-    public static  String getOutputPath(String outputPathDir,String inputPath, DataModel dataModel) {
+    public static String getOutputPath(String outputPathDir, String inputPath, DataModel dataModel) {
         int startIndex = inputPath.indexOf("templates");
         startIndex += "templates".length();
-        int endIndex = inputPath.lastIndexOf(File.separator)+1;
+        int endIndex = inputPath.lastIndexOf(File.separator) + 1;
         String fileName = inputPath.substring(endIndex);
         switch (fileName) {
             case "AddRequest.java.ftl":
@@ -86,7 +85,7 @@ public class Generator {
             case "SearchRequest.java.ftl":
                 fileName = "Search" + dataModel.getModelName() + "Request.java";
                 break;
-            case   "EntityVo.java.ftl":
+            case "EntityVo.java.ftl":
                 fileName = dataModel.getModelName() + "Vo.java";
                 break;
             case "EntityController.java.ftl":

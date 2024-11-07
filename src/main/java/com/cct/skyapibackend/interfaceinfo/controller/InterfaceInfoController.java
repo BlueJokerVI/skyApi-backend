@@ -1,11 +1,13 @@
 package com.cct.skyapibackend.interfaceinfo.controller;
 
+import com.cct.skyapibackend.common.annotation.RoleAccess;
+import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
 import com.cct.skyapibackend.common.domain.vo.BaseResponse;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.AddInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoListRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoRequest;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.UpdateInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
 import com.cct.skyapibackend.interfaceinfo.service.InterfaceInfoService;
 import io.swagger.annotations.Api;
@@ -27,20 +29,38 @@ public class InterfaceInfoController {
     @Resource
     InterfaceInfoService interfaceInfoService;
 
+    @GetMapping("/online")
+    @ApiOperation("接口上线")
+    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
+    BaseResponse<Void>  onlineInterfaceInfo(@Valid @NotNull @RequestParam Long interfaceInfoId){
+        return interfaceInfoService.onlineInterfaceInfo(interfaceInfoId);
+    }
+
+    @GetMapping("/offline")
+    @ApiOperation("接口下线")
+    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
+    BaseResponse<Void>  offlineInterfaceInfo(@Valid @NotNull @RequestParam Long interfaceInfoId){
+        return interfaceInfoService.offlineInterfaceInfo(interfaceInfoId);
+    }
+
+
     @PostMapping("/add")
     @ApiOperation("接口添加")
+    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
     BaseResponse<InterfaceInfoVo>  addInterfaceInfo(@Valid @RequestBody AddInterfaceInfoRequest addInterfaceInfoRequest){
         return interfaceInfoService.addInterfaceInfo(addInterfaceInfoRequest);
     }
 
     @GetMapping("/delete")
     @ApiOperation("接口删除")
+    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
     BaseResponse<Void>  deleteInterfaceInfo(@Valid @NotNull @RequestParam Long interfaceInfoId){
         return interfaceInfoService.deleteInterfaceInfo(interfaceInfoId);
     }
 
     @PostMapping("/update")
     @ApiOperation("接口更新")
+    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
     BaseResponse<InterfaceInfoVo>  updateInterfaceInfo(@Valid @RequestBody UpdateInterfaceInfoRequest updateInterfaceInfoRequest){
         return interfaceInfoService.updateInterfaceInfo(updateInterfaceInfoRequest);
     }

@@ -2,7 +2,7 @@ package com.cct.skyapibackend.interfaceinfo.dao;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cct.skyapibackend.interfaceinfo.dao.mapper.InterfaceInfoMapper;
-import com.cct.skyapibackend.interfaceinfo.domain.dto.SearchInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import org.springframework.stereotype.Repository;
 
