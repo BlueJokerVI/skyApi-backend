@@ -91,3 +91,10 @@ oss:
 # AI调用
 ai:
   apiSecretKey: ${skyapi.ai.apiSecretKey}
+
+# skyApi
+skyApi:
+  client:
+    access-key: sky
+    secret-key: cc111111
+    uid: 1853344191919910914

@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
 
         //4.注册用户
         User user = User.builder().account(account).password(newPassword).build();
+
+        //5.给用户分配ak,sk
+        String ak = IdUtil.fastSimpleUUID();
+        String sk = IdUtil.fastSimpleUUID();
+        user.setAccessKey(ak);
+        user.setSecretKey(sk);
         return userDao.save(user);
     }
 

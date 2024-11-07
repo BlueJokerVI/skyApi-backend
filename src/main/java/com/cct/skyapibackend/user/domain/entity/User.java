@@ -62,6 +62,19 @@ public class User implements Serializable {
     private String userProfile;
 
     /**
+     * ak
+     */
+    @TableField(value = "access_key")
+    private String accessKey;
+
+    /**
+     * sk
+     */
+    @TableField(value = "secret_key")
+    private String secretKey;
+
+
+    /**
      * 普通用户：0、管理员：1、黑名单用户：2
      */
     @TableField(value = "user_role")
