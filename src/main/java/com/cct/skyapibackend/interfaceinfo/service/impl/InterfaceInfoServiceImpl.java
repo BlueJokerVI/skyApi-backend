@@ -88,7 +88,7 @@ public class InterfaceInfoServiceImpl implements InterfaceInfoService {
         LambdaQueryWrapper<InterfaceInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.select()
                 .eq(searchInterfaceInfoListRequest.getId() != null, InterfaceInfo::getId, searchInterfaceInfoListRequest.getId())
-                .eq(searchInterfaceInfoListRequest.getName() != null, InterfaceInfo::getName, searchInterfaceInfoListRequest.getName())
+                .like(searchInterfaceInfoListRequest.getName() != null, InterfaceInfo::getName, searchInterfaceInfoListRequest.getName())
                 .like(searchInterfaceInfoListRequest.getDescription() != null, InterfaceInfo::getDescription, searchInterfaceInfoListRequest.getDescription())
                 .eq(searchInterfaceInfoListRequest.getUrl() != null, InterfaceInfo::getUrl, searchInterfaceInfoListRequest.getUrl())
                 .eq(searchInterfaceInfoListRequest.getRequestHeader() != null, InterfaceInfo::getRequestHeader, searchInterfaceInfoListRequest.getRequestHeader())

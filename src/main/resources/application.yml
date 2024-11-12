@@ -31,17 +31,17 @@ spring:
     # 配置Date类型序列化格式
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-#  shardingsphere:
-#    #数据源配置
-#    datasource:
-#      # 多数据源以逗号隔开即可
-#      names: skyapi
-#      skyapi:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        jdbc-url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#        username: ${skyapi.mysql.username}
-#        password: ${skyapi.mysql.password}
+    #  shardingsphere:
+    #    #数据源配置
+    #    datasource:
+    #      # 多数据源以逗号隔开即可
+    #      names: skyapi
+    #      skyapi:
+    #        type: com.zaxxer.hikari.HikariDataSource
+    #        driver-class-name: com.mysql.cj.jdbc.Driver
+    #        jdbc-url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    #        username: ${skyapi.mysql.username}
+    #        password: ${skyapi.mysql.password}
     # 规则配置
     rules:
       sharding:
@@ -93,8 +93,9 @@ ai:
   apiSecretKey: ${skyapi.ai.apiSecretKey}
 
 # skyApi
-skyApi:
+sky-api:
   client:
-    access-key: sky
-    secret-key: cc111111
-    uid: 1853344191919910914
+    access-key: 8e5b1a20360b4592b7f8ebd10e2731df
+    secret-key: e098873dbbd047d08a78c0e8fd69f49d
+    uid: 1854793399153057794
+

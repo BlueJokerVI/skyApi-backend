@@ -7,6 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cct.skyapibackend.common.domain.dto.AKSK;
 import com.cct.skyapibackend.common.domain.dto.RequestInfo;
 import com.cct.skyapibackend.common.domain.enums.RespCodeEnum;
 import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
@@ -33,8 +34,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import static com.cct.skyapibackend.common.constant.CommonConstant.*;
-import static com.cct.skyapibackend.common.constant.RedisConstant.LOGIN_USER_KEY_PREFIX;
-import static com.cct.skyapibackend.common.constant.RedisConstant.REFRESH_TOKEN_PREFIX;
+import static com.cct.skyapibackend.common.constant.RedisConstant.*;
 
 
 /**
@@ -139,10 +139,13 @@ public class UserServiceImpl implements UserService {
         DateTime expireTime = DateUtil.offset(createTime, ACCESS_TOKEN_EXPIRE_DATEFIELD, ACCESS_TOKEN_EXPIRE_OFFSET);
         tokenVo.setExpires(expireTime);
         userVo.setTokenVo(tokenVo);
-        //7.将登录的用户信息、refreshToken存入redis
+        //7.将登录的用户信息、refreshToken、ak、sk存入redis
         RedisUtils.set(LOGIN_USER_KEY_PREFIX + user.getId(), userVo, REFRESH_TOKEN_EXPIRE_OFFSET, REFRESH_TOKEN_EXPIRE_TIMEUNIT);
         RedisUtils.set(REFRESH_TOKEN_PREFIX + user.getId(), refreshToken, REFRESH_TOKEN_EXPIRE_OFFSET, REFRESH_TOKEN_EXPIRE_TIMEUNIT);
-
+        AKSK aksk = new AKSK();
+        aksk.setAccessKey(user.getAccessKey());
+        aksk.setSecretKey(user.getSecretKey());
+        RedisUtils.set(USER_AK_SK_PREFIX + user.getId(), aksk);
         return userVo;
     }
 

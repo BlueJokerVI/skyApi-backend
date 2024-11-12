@@ -39,4 +39,10 @@ public interface RedisConstant {
      * redisson限流器前缀
      */
     String LIMITER_PREFIX = PROJECT_PREFIX + "limit:";
+
+    /**
+     * redis中存储了每个用户对应的ak，sk
+     * 用户ak，sk的key前缀
+     */
+    String USER_AK_SK_PREFIX = PROJECT_PREFIX + "ak-sk:";
 }

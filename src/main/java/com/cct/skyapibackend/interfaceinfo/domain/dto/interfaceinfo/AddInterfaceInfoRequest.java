@@ -36,6 +36,11 @@ public class AddInterfaceInfoRequest implements Serializable {
     private String url;
 
 
+    @ApiModelProperty(value = "接口参数")
+    @Size(max = 255, message = "长度请在要求范围内")
+    private String requestParam;
+
+
     @ApiModelProperty(value = "接口请求头")
     @Size(max = 8192, message = "长度请在要求范围内")
     private String requestHeader;

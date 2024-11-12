@@ -37,8 +37,6 @@ public class InterfaceInfoVo implements Serializable {
     private Date createTime;
     
     private Date updateTime;
-    
-    private Integer isDelete;
 
     public static InterfaceInfoVo toVo(InterfaceInfo interfaceInfo) {
         InterfaceInfoVo interfaceInfoVo = new InterfaceInfoVo();

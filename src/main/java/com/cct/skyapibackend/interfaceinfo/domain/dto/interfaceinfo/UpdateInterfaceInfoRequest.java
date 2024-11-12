@@ -3,18 +3,14 @@ package com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
-import java.util.Date;
+
 /**
-* @description 接口信息表更新请求
-* @author cct
-*/
+ * @author cct
+ * @description 接口信息表更新请求
+ */
 @Data
 public class UpdateInterfaceInfoRequest implements Serializable {
 
@@ -33,6 +29,11 @@ public class UpdateInterfaceInfoRequest implements Serializable {
     @ApiModelProperty(value = "接口url")
     @Size(max = 512, message = "长度请在要求范围内")
     private String url;
+
+
+    @ApiModelProperty(value = "接口参数")
+    @Size(max = 255, message = "长度请在要求范围内")
+    private String requestParam;
 
     @ApiModelProperty(value = "接口请求头")
     @Size(max = 8192, message = "长度请在要求范围内")

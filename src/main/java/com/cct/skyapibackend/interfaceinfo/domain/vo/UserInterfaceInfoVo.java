@@ -30,8 +30,6 @@ public class UserInterfaceInfoVo implements Serializable {
     private Date createTime;
     
     private Date updateTime;
-    
-    private Integer isDelete;
 
     public static UserInterfaceInfoVo toVo(UserInterfaceInfo userInterfaceInfo) {
         UserInterfaceInfoVo userInterfaceInfoVo = new UserInterfaceInfoVo();
