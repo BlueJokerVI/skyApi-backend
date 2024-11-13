@@ -1,10 +1,12 @@
 package com.cct.skyapibackend.interfaceinfo.controller;
 
+import com.cct.skyapibackend.common.annotation.Login;
 import com.cct.skyapibackend.common.annotation.RoleAccess;
 import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
 import com.cct.skyapibackend.common.domain.vo.BaseResponse;
 import com.cct.skyapibackend.common.utils.RespUtils;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
+import com.cct.skyapibackend.interfaceinfo.service.InvokerService;
 import com.cct.skyapiclientsdk.client.ApiClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,11 +32,14 @@ public class InvokeController {
     @Resource
     private ApiClient apiClient;
 
+    @Resource
+    private InvokerService invokerService;
+
     @PostMapping
     @ApiOperation("接口调用")
-    @RoleAccess(role = UserRoleEnum.ADMIN_USER)
+    @Login
     BaseResponse<Object> invoke(@Valid @RequestBody InvokeReq invokeReq) {
-        String res = apiClient.post(invokeReq.getRequestParam());
+        Object res = invokerService.invoke(invokeReq);
         return RespUtils.success(res);
     }
 

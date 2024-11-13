@@ -44,6 +44,12 @@ public class UserVo implements Serializable {
     @ApiModelProperty("Token信息")
     private TokenVo tokenVo;
 
+    @ApiModelProperty("accessKey")
+    private String accessKey;
+
+    @ApiModelProperty("secretKey")
+    private String secretKey;
+
 
     public static UserVo getVo(User user){
         UserVo userVo = new UserVo();
