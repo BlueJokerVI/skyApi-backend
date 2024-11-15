@@ -50,6 +50,14 @@
             <version>3.0.3</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.cct</groupId>
+            <artifactId>skyApi-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -3,13 +3,14 @@ package com.cct.skyapibackend.interfaceinfo.controller;
 import com.cct.skyapibackend.common.annotation.RoleAccess;
 import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
-import com.cct.skyapibackend.common.domain.vo.BaseResponse;
+
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
 import com.cct.skyapibackend.interfaceinfo.service.InterfaceInfoService;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class InterfaceInfoController {
     @GetMapping("/offline")
     @ApiOperation("接口下线")
     @RoleAccess(role = UserRoleEnum.ADMIN_USER)
-    BaseResponse<Void>  offlineInterfaceInfo(@Valid @NotNull @RequestParam Long interfaceInfoId){
+    BaseResponse<Void> offlineInterfaceInfo(@Valid @NotNull @RequestParam Long interfaceInfoId){
         return interfaceInfoService.offlineInterfaceInfo(interfaceInfoId);
     }
 

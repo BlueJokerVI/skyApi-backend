@@ -3,7 +3,7 @@ package com.cct.skyapibackend.interfaceinfo.controller;
 import com.cct.skyapibackend.common.annotation.Login;
 import com.cct.skyapibackend.common.annotation.RoleAccess;
 import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
-import com.cct.skyapibackend.common.domain.vo.BaseResponse;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapibackend.common.utils.RespUtils;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
 import com.cct.skyapibackend.interfaceinfo.service.InvokerService;

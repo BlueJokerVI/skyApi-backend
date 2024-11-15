@@ -1,7 +1,7 @@
 package com.cct.skyapibackend.interfaceinfo.service;
 
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
-import com.cct.skyapibackend.common.domain.vo.BaseResponse;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.userinterfaceinfo.AddUserInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.userinterfaceinfo.SearchUserInterfaceInfoListRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.userinterfaceinfo.SearchUserInterfaceInfoRequest;

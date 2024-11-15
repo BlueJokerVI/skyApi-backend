@@ -1,7 +1,7 @@
 package com.cct.skyapibackend.common.utils;
 
-import com.cct.skyapibackend.common.domain.enums.RespCodeEnum;
-import com.cct.skyapibackend.common.domain.vo.BaseResponse;
+import com.cct.skyapicommon.domain.enums.RespCodeEnum;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 
 /**
  * @BelongsProject: skyapibackend

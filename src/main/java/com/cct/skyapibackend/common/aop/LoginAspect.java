@@ -1,8 +1,8 @@
 package com.cct.skyapibackend.common.aop;
 
 import com.cct.skyapibackend.common.annotation.Login;
-import com.cct.skyapibackend.common.domain.enums.RespCodeEnum;
-import com.cct.skyapibackend.common.utils.ThrowUtils;
+import com.cct.skyapicommon.domain.enums.RespCodeEnum;
+import com.cct.skyapicommon.utils.ThrowUtils;
 import com.cct.skyapibackend.user.domain.vo.UserVo;
 import com.cct.skyapibackend.user.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;

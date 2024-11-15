@@ -6,8 +6,9 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.cct.skyapibackend.common.domain.enums.HttpMethod;
-import com.cct.skyapibackend.common.domain.enums.RespCodeEnum;
-import com.cct.skyapibackend.common.utils.ThrowUtils;
+
+import com.cct.skyapicommon.domain.enums.RespCodeEnum;
+import com.cct.skyapicommon.utils.ThrowUtils;
 import com.cct.skyapibackend.interfaceinfo.dao.InterfaceInfoDao;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;

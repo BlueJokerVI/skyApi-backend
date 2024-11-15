@@ -1,18 +1,11 @@
 package com.cct.skyapibackend.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cct.skyapibackend.common.domain.enums.RespCodeEnum;
-import com.cct.skyapibackend.common.utils.HttpUtils;
-import com.cct.skyapibackend.common.utils.ThrowUtils;
+import com.cct.skyapicommon.domain.enums.RespCodeEnum;
 import com.cct.skyapibackend.user.domain.dto.*;
 import com.cct.skyapibackend.user.domain.entity.User;
 import com.cct.skyapibackend.user.domain.vo.TokenVo;
 import com.cct.skyapibackend.user.domain.vo.UserVo;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import static com.cct.skyapibackend.common.constant.CommonConstant.LOGIN_USER_INFO_SESSION_KEY;
 
 /**
 * @author cct

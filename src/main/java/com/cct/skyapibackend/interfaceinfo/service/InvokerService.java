@@ -1,6 +1,6 @@
 package com.cct.skyapibackend.interfaceinfo.service;
 
-import com.cct.skyapibackend.common.domain.vo.BaseResponse;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
 
 /**
