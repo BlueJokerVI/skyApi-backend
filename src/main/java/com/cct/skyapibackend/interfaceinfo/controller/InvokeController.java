@@ -1,5 +1,6 @@
 package com.cct.skyapibackend.interfaceinfo.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.cct.skyapibackend.common.annotation.Login;
 import com.cct.skyapibackend.common.annotation.RoleAccess;
 import com.cct.skyapibackend.common.domain.enums.UserRoleEnum;
@@ -38,9 +39,8 @@ public class InvokeController {
     @PostMapping
     @ApiOperation("接口调用")
     @Login
-    BaseResponse<Object> invoke(@Valid @RequestBody InvokeReq invokeReq) {
-        Object res = invokerService.invoke(invokeReq);
-        return RespUtils.success(res);
+    String invoke(@Valid @RequestBody InvokeReq invokeReq) {
+        return  invokerService.invoke(invokeReq);
     }
 
 }

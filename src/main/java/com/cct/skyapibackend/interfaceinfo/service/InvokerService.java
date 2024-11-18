@@ -10,5 +10,5 @@ import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
  * @Version: 1.0
  */
 public interface InvokerService{
-     Object invoke(InvokeReq invokeReq);
+     String invoke(InvokeReq invokeReq);
 }

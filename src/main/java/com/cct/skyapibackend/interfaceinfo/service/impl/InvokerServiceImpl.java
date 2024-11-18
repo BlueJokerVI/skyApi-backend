@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import cn.hutool.json.JSONUtil;
 import com.cct.skyapibackend.common.domain.enums.HttpMethod;
 import com.cct.skyapibackend.interfaceinfo.dao.InterfaceInfoDao;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
@@ -14,7 +15,9 @@ import com.cct.skyapibackend.user.domain.vo.UserVo;
 import com.cct.skyapibackend.user.service.UserService;
 import com.cct.skyapiclientsdk.utils.SignUtils;
 import com.cct.skyapicommon.domain.enums.RespCodeEnum;
+import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapicommon.exception.BusinessException;
+import com.cct.skyapicommon.utils.JsonUtils;
 import com.cct.skyapicommon.utils.ThrowUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,7 +45,7 @@ public class InvokerServiceImpl implements InvokerService {
     private InterfaceInfoDao interfaceInfoDao;
 
     @Override
-    public Object invoke(InvokeReq invokeReq) {
+    public String invoke(InvokeReq invokeReq) {
         // 1.获取当前用户ak ，sk
         // 2.获取要调用接口信息
         // 3.封装调用接口请求
