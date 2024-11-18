@@ -99,3 +99,14 @@ sky-api:
     secret-key: e098873dbbd047d08a78c0e8fd69f49d
     uid: 1854793399153057794
 
+# dubbo
+dubbo:
+  application:
+    logger: slf4j
+    name: skyApiApplication
+  registry:
+    address: nacos://localhost:8848?username=nacos&password=nacos
+    register-mode: instance # 新用户请设置此值，表示启用应用级服务发现，可选值 interface、instance、all，默认值为 all，未来版本将切换默认值为 instance
+  protocol:
+    name: tri
+    port: 50051

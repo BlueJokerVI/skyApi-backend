@@ -6,9 +6,6 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.cct.skyapibackend.common.domain.enums.HttpMethod;
-
-import com.cct.skyapicommon.domain.enums.RespCodeEnum;
-import com.cct.skyapicommon.utils.ThrowUtils;
 import com.cct.skyapibackend.interfaceinfo.dao.InterfaceInfoDao;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
@@ -16,6 +13,9 @@ import com.cct.skyapibackend.interfaceinfo.service.InvokerService;
 import com.cct.skyapibackend.user.domain.vo.UserVo;
 import com.cct.skyapibackend.user.service.UserService;
 import com.cct.skyapiclientsdk.utils.SignUtils;
+import com.cct.skyapicommon.domain.enums.RespCodeEnum;
+import com.cct.skyapicommon.exception.BusinessException;
+import com.cct.skyapicommon.utils.ThrowUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -51,9 +51,12 @@ public class InvokerServiceImpl implements InvokerService {
         String accessKey = currentUser.getAccessKey();
         String secretKey = currentUser.getSecretKey();
 
-        ThrowUtils.throwIf(StrUtil.isBlank(accessKey) || StrUtil.isBlank(secretKey)
-                , RespCodeEnum.SYSTEM_ERROR, "系统错误ak 或 sk 不存在");
-        log.error("系统错误用户id: {} ,ak 或 sk 不存在", currentUser.getId());
+
+        if (StrUtil.isBlank(accessKey) || StrUtil.isBlank(secretKey)) {
+            log.error("系统错误用户id: {} ,ak 或 sk 不存在", currentUser.getId());
+            throw new BusinessException(RespCodeEnum.SYSTEM_ERROR, "系统错误ak 或 sk 不存在");
+        }
+
 
         InterfaceInfo interfaceInfo = interfaceInfoDao.getById(invokeReq.getInterfaceId());
         ThrowUtils.throwIf(interfaceInfo == null, RespCodeEnum.PARAMS_ERROR, "接口不存在");

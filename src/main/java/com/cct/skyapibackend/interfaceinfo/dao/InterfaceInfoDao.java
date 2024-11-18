@@ -6,27 +6,37 @@ import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterf
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
-* @description 接口信息表数据库操作层
-* @author cct
-*/
+ * @author cct
+ * @description 接口信息表数据库操作层
+ */
 @Repository
 public class InterfaceInfoDao extends ServiceImpl<InterfaceInfoMapper, InterfaceInfo> {
 
 
     public InterfaceInfo searchInterfaceInfo(SearchInterfaceInfoRequest searchInterfaceInfoRequest) {
         return lambdaQuery().select()
-                            .eq(searchInterfaceInfoRequest.getId() != null, InterfaceInfo::getId, searchInterfaceInfoRequest.getId())
-                            .eq(searchInterfaceInfoRequest.getName() != null, InterfaceInfo::getName, searchInterfaceInfoRequest.getName())
-                            .like(searchInterfaceInfoRequest.getDescription() != null, InterfaceInfo::getDescription, searchInterfaceInfoRequest.getDescription())
-                            .eq(searchInterfaceInfoRequest.getUrl() != null, InterfaceInfo::getUrl, searchInterfaceInfoRequest.getUrl())
-                            .eq(searchInterfaceInfoRequest.getRequestHeader() != null, InterfaceInfo::getRequestHeader, searchInterfaceInfoRequest.getRequestHeader())
-                            .eq(searchInterfaceInfoRequest.getResponseHeader() != null, InterfaceInfo::getResponseHeader, searchInterfaceInfoRequest.getResponseHeader())
-                            .eq(searchInterfaceInfoRequest.getStatus() != null, InterfaceInfo::getStatus, searchInterfaceInfoRequest.getStatus())
-                            .eq(searchInterfaceInfoRequest.getMethod() != null, InterfaceInfo::getMethod, searchInterfaceInfoRequest.getMethod())
-                            .eq(searchInterfaceInfoRequest.getUserId() != null, InterfaceInfo::getUserId, searchInterfaceInfoRequest.getUserId())
-                            .ge(searchInterfaceInfoRequest.getUpdateTime() != null, InterfaceInfo::getUpdateTime, searchInterfaceInfoRequest.getUpdateTime())
-                            .last("limit 1").one();
+                .eq(searchInterfaceInfoRequest.getId() != null, InterfaceInfo::getId, searchInterfaceInfoRequest.getId())
+                .eq(searchInterfaceInfoRequest.getName() != null, InterfaceInfo::getName, searchInterfaceInfoRequest.getName())
+                .like(searchInterfaceInfoRequest.getDescription() != null, InterfaceInfo::getDescription, searchInterfaceInfoRequest.getDescription())
+                .eq(searchInterfaceInfoRequest.getUrl() != null, InterfaceInfo::getUrl, searchInterfaceInfoRequest.getUrl())
+                .eq(searchInterfaceInfoRequest.getRequestHeader() != null, InterfaceInfo::getRequestHeader, searchInterfaceInfoRequest.getRequestHeader())
+                .eq(searchInterfaceInfoRequest.getResponseHeader() != null, InterfaceInfo::getResponseHeader, searchInterfaceInfoRequest.getResponseHeader())
+                .eq(searchInterfaceInfoRequest.getStatus() != null, InterfaceInfo::getStatus, searchInterfaceInfoRequest.getStatus())
+                .eq(searchInterfaceInfoRequest.getMethod() != null, InterfaceInfo::getMethod, searchInterfaceInfoRequest.getMethod())
+                .eq(searchInterfaceInfoRequest.getUserId() != null, InterfaceInfo::getUserId, searchInterfaceInfoRequest.getUserId())
+                .ge(searchInterfaceInfoRequest.getUpdateTime() != null, InterfaceInfo::getUpdateTime, searchInterfaceInfoRequest.getUpdateTime())
+                .last("limit 1").one();
+    }
+
+    public Long getIdByUrlAndMethod(String url, String method) {
+        InterfaceInfo one = lambdaQuery().select()
+                .eq(InterfaceInfo::getUrl, url)
+                .eq(InterfaceInfo::getMethod, method)
+                .one();
+        return Optional.of(one).map(InterfaceInfo::getId).orElse(null);
     }
 }
 

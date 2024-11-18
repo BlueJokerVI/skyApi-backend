@@ -50,11 +50,25 @@
             <version>3.0.3</version>
         </dependency>
 
-
+        <!--公共模块-->
         <dependency>
             <groupId>com.cct</groupId>
             <artifactId>skyApi-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!--dubbo-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!--注册中心nacos-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-nacos-spring-boot-starter</artifactId>
+            <version>3.3.0</version>
         </dependency>
 
 
