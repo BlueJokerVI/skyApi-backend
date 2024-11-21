@@ -35,6 +35,27 @@ public class UpdateInterfaceInfoRequest implements Serializable {
     @Size(max = 255, message = "长度请在要求范围内")
     private String requestParam;
 
+    /**
+     * 响应参数示例json格式
+     */
+    @ApiModelProperty(value = "接口响应参数")
+    @Size(max = 255, message = "长度请在要求范围内")
+    private String responseParam;
+
+    /**
+     * 响应参数描述,json格式[{name:"",require:false,desc:"",type:""}]
+     */
+    @ApiModelProperty(value = "接口响应参数描述")
+    @Size(max = 255, message = "长度请在要求范围内")
+    private String responseParamDesc;
+
+    /**
+     * 请求参数描述,json格式[{name:"",require:false,desc:"",type:""}]
+     */
+    @ApiModelProperty(value = "接口请求参数描述")
+    @Size(max = 255, message = "长度请在要求范围内")
+    private String requestParamDesc;
+
     @ApiModelProperty(value = "接口请求头")
     @Size(max = 8192, message = "长度请在要求范围内")
     private String requestHeader;

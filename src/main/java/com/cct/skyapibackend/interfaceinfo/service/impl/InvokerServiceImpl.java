@@ -10,16 +10,18 @@ import com.cct.skyapibackend.common.domain.enums.HttpMethod;
 import com.cct.skyapibackend.interfaceinfo.dao.InterfaceInfoDao;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.invoke.InvokeReq;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
+import com.cct.skyapibackend.interfaceinfo.domain.enums.InterfaceStatusEnum;
 import com.cct.skyapibackend.interfaceinfo.service.InvokerService;
 import com.cct.skyapibackend.user.domain.vo.UserVo;
 import com.cct.skyapibackend.user.service.UserService;
-import com.cct.skyapiclientsdk.utils.SignUtils;
 import com.cct.skyapicommon.domain.enums.RespCodeEnum;
 import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapicommon.exception.BusinessException;
 import com.cct.skyapicommon.utils.JsonUtils;
+import com.cct.skyapicommon.utils.SignUtils;
 import com.cct.skyapicommon.utils.ThrowUtils;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,6 +65,7 @@ public class InvokerServiceImpl implements InvokerService {
 
         InterfaceInfo interfaceInfo = interfaceInfoDao.getById(invokeReq.getInterfaceId());
         ThrowUtils.throwIf(interfaceInfo == null, RespCodeEnum.PARAMS_ERROR, "接口不存在");
+        ThrowUtils.throwIf(interfaceInfo.getStatus().equals(InterfaceStatusEnum.STOP.getCode()),RespCodeEnum.PARAMS_ERROR,"接口不可用");
 
         String url = interfaceInfo.getUrl();
         String method = interfaceInfo.getMethod();
@@ -72,7 +75,7 @@ public class InvokerServiceImpl implements InvokerService {
         String uri = URLUtil.getPath(url);
         String param = invokeReq.getRequestParam();
         String res;
-        if (method.equals(HttpMethod.POST.getDesc())) {
+        if (method.equalsIgnoreCase(HttpMethod.POST.getDesc())) {
             //post请求
 
             //计算sign

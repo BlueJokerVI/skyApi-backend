@@ -8,6 +8,7 @@ import com.cct.skyapibackend.interfaceinfo.domain.dto.userinterfaceinfo.SearchUs
 import com.cct.skyapibackend.interfaceinfo.domain.dto.userinterfaceinfo.UpdateUserInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.UserInterfaceInfoVo;
 import com.cct.skyapibackend.interfaceinfo.service.UserInterfaceInfoService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/userInterfaceInfo")
+@Api(tags = "用户接口控制器")
 public class UserInterfaceInfoController {
 
     @Resource

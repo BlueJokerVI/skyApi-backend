@@ -36,7 +36,7 @@ public class InterfaceInfoDao extends ServiceImpl<InterfaceInfoMapper, Interface
                 .eq(InterfaceInfo::getUrl, url)
                 .eq(InterfaceInfo::getMethod, method)
                 .one();
-        return Optional.of(one).map(InterfaceInfo::getId).orElse(null);
+        return Optional.ofNullable(one).map(InterfaceInfo::getId).orElse(null);
     }
 }
 

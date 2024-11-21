@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
- * 
  * @TableName interface_info
  */
-@TableName(value ="interface_info")
+@TableName(value = "interface_info")
 @Data
 public class InterfaceInfo implements Serializable {
     /**
@@ -50,6 +50,24 @@ public class InterfaceInfo implements Serializable {
      */
     @TableField(value = "request_header")
     private String requestHeader;
+
+    /**
+     * 响应参数示例json格式
+     */
+    @TableField(value = "response_param")
+    private String responseParam;
+
+    /**
+     * 响应参数描述,json格式[{name:"",require:false,desc:"",type:""}]
+     */
+    @TableField(value = "response_param_desc")
+    private String responseParamDesc;
+
+    /**
+     * 请求参数描述,json格式[{name:"",require:false,desc:"",type:""}]
+     */
+    @TableField(value = "request_param_desc")
+    private String requestParamDesc;
 
     /**
      * 响应头
