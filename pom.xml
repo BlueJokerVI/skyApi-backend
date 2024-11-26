@@ -149,13 +149,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--客户端client-->
-        <dependency>
-            <groupId>com.cct</groupId>
-            <artifactId>skyApi-client-sdk</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
 
     </dependencies>
     <dependencyManagement>

@@ -30,6 +30,10 @@ public class UpdateInterfaceInfoRequest implements Serializable {
     @Size(max = 512, message = "长度请在要求范围内")
     private String url;
 
+    @ApiModelProperty(value = "接口url")
+    @Size(max = 512, message = "长度请在要求范围内")
+    private String iconUrl;
+
 
     @ApiModelProperty(value = "接口参数")
     @Size(max = 255, message = "长度请在要求范围内")

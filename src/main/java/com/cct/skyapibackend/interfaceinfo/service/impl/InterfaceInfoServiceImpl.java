@@ -6,6 +6,7 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
+import com.cct.skyapibackend.interfaceinfo.domain.vo.IdNameVo;
 import com.cct.skyapicommon.domain.enums.RespCodeEnum;
 import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapibackend.common.utils.RespUtils;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author cct
@@ -124,5 +126,11 @@ public class InterfaceInfoServiceImpl implements InterfaceInfoService {
         existed.setStatus(InterfaceStatusEnum.STOP.getCode());
         ThrowUtils.throwIf(!interfaceInfoDao.updateById(existed), RespCodeEnum.OPERATION_ERROR, "接口下线失败");
         return RespUtils.success();
+    }
+
+    @Override
+    public BaseResponse<List<IdNameVo>> idAndNameSearch() {
+        List<IdNameVo> idNames = interfaceInfoMapper.getIdAndName();
+        return RespUtils.success(idNames);
     }
 }

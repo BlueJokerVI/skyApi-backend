@@ -2,6 +2,9 @@ package com.cct.skyapibackend.interfaceinfo.dao.mapper;
 
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cct.skyapibackend.interfaceinfo.domain.vo.IdNameVo;
+
+import java.util.List;
 
 /**
 * @author cct
@@ -11,6 +14,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface InterfaceInfoMapper extends BaseMapper<InterfaceInfo> {
 
+    /**
+     * 全量查询id和name
+     * @return
+     */
+    List<IdNameVo> getIdAndName();
 }
 
 

@@ -94,6 +94,12 @@ public class InterfaceInfo implements Serializable {
     private Long userId;
 
     /**
+     * 接口icon
+     */
+    @TableField(value = "icon_url")
+    private String iconUrl;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time")

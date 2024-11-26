@@ -1,12 +1,15 @@
 package com.cct.skyapibackend.interfaceinfo.service;
 
 import com.cct.skyapibackend.common.domain.vo.BasePageResp;
+import com.cct.skyapibackend.interfaceinfo.domain.vo.IdNameVo;
 import com.cct.skyapicommon.domain.vo.BaseResponse;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
+
+import java.util.List;
 
 /**
  * @description 接口信息表服务层
@@ -62,4 +65,10 @@ public interface InterfaceInfoService {
      * @return
      */
     BaseResponse<Void> offlineInterfaceInfo(Long interfaceInfoId);
+
+    /**
+     * 全量查询接口id与名称
+     * @return
+     */
+    BaseResponse<List<IdNameVo>> idAndNameSearch();
 }

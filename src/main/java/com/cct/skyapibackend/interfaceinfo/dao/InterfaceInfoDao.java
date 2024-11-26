@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cct.skyapibackend.interfaceinfo.dao.mapper.InterfaceInfoMapper;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.entity.InterfaceInfo;
+import com.cct.skyapibackend.interfaceinfo.domain.vo.IdNameVo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,9 +37,10 @@ public class InterfaceInfoDao extends ServiceImpl<InterfaceInfoMapper, Interface
         InterfaceInfo one = lambdaQuery().select()
                 .eq(InterfaceInfo::getUrl, url)
                 .eq(InterfaceInfo::getMethod, method)
-                .one();
+                .last("limit 1").one();
         return Optional.ofNullable(one).map(InterfaceInfo::getId).orElse(null);
     }
+
 }
 
 

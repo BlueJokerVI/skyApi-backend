@@ -1,0 +1,8 @@
+server:
+  port: 9999
+sky-api:
+  client:
+    access-key: 8e5b1a20360b4592b7f8ebd10e2731df
+    secret-key: e098873dbbd047d08a78c0e8fd69f49d
+    url: http://localhost:8080
+    uid: 1854793399153057794

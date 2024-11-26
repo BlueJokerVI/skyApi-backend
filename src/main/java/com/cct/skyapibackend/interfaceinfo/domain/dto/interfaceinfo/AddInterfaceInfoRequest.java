@@ -37,9 +37,13 @@ public class AddInterfaceInfoRequest implements Serializable {
     @Size(max = 512, message = "长度请在要求范围内")
     private String url;
 
+    @ApiModelProperty(value = "接口iconUrl")
+    @NotBlank
+    @Size(max = 512, message = "长度请在要求范围内")
+    private String iconUrl;
+
 
     @ApiModelProperty(value = "接口参数")
-    @NotBlank
     @Size(max = 255, message = "长度请在要求范围内")
     private String requestParam;
 
@@ -49,7 +53,7 @@ public class AddInterfaceInfoRequest implements Serializable {
      */
     @ApiModelProperty(value = "接口响应参数")
     @NotBlank
-    @Size(max = 255, message = "长度请在要求范围内")
+    @Size(max = 512, message = "长度请在要求范围内")
     private String responseParam;
 
     /**
@@ -57,7 +61,7 @@ public class AddInterfaceInfoRequest implements Serializable {
      */
     @ApiModelProperty(value = "接口响应参数描述")
     @NotBlank
-    @Size(max = 255, message = "长度请在要求范围内")
+    @Size(max = 512, message = "长度请在要求范围内")
     private String responseParamDesc;
 
     /**

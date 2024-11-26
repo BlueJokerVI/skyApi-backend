@@ -8,6 +8,7 @@ import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.AddInterface
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoListRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.SearchInterfaceInfoRequest;
 import com.cct.skyapibackend.interfaceinfo.domain.dto.interfaceinfo.UpdateInterfaceInfoRequest;
+import com.cct.skyapibackend.interfaceinfo.domain.vo.IdNameVo;
 import com.cct.skyapibackend.interfaceinfo.domain.vo.InterfaceInfoVo;
 import com.cct.skyapibackend.interfaceinfo.service.InterfaceInfoService;
 import com.cct.skyapicommon.domain.vo.BaseResponse;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+
 /**
  * @description 接口信息表控制器
  * @author cct
@@ -70,6 +73,12 @@ public class InterfaceInfoController {
     @ApiOperation("接口查询")
     BaseResponse<InterfaceInfoVo>  searchInterfaceInfo(@Valid @RequestBody SearchInterfaceInfoRequest searchInterfaceInfoRequest){
         return interfaceInfoService.searchInterfaceInfo(searchInterfaceInfoRequest);
+    }
+
+    @GetMapping("/IdAndName/search")
+    @ApiOperation("接口查询IdNames")
+    BaseResponse<List<IdNameVo>>  idAndNameSearch(){
+        return interfaceInfoService.idAndNameSearch();
     }
 
     @PostMapping("/searchPage")
