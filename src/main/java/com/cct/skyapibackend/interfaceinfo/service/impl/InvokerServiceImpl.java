@@ -21,10 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * @BelongsProject: skyApi-backend
@@ -88,6 +87,7 @@ public class InvokerServiceImpl implements InvokerService {
         } else {
             //get请求
             Map<String, Object> params = parseQueryString(param);
+            param = sorted(param);
             String content = uri + "\n" + param;
             String sign = SignUtils.sign(content, secretKey);
             headers.put("sign", Collections.singletonList(sign));
@@ -112,13 +112,18 @@ public class InvokerServiceImpl implements InvokerService {
 
 
     /**
-     * 处理get请求参数  将a=1&b=2的参数转为Map类型
+     * 解析查询字符串并对每个键值对进行 URL 编码
      *
-     * @param query
-     * @return
+     * @param query 查询字符串，格式如 key1=value1&key2=value2
+     * @return 解析后的键值对 Map
      */
-    public Map<String, Object> parseQueryString(String query) {
+    private static Map<String, Object> parseQueryString(String query) {
         Map<String, Object> params = new HashMap<>();
+
+        if (query == null || query.trim().isEmpty()) {
+            // 如果查询字符串为空或 null，则直接返回空 Map
+            return params;
+        }
 
         // 分割每个键值对
         String[] pairs = query.split("&");
@@ -128,9 +133,34 @@ public class InvokerServiceImpl implements InvokerService {
             String key = keyValue[0];
             String value = keyValue.length > 1 ? keyValue[1] : "";
 
+            try {
+                // 对键和值进行 URL 编码
+                key = URLEncoder.encode(key, "UTF-8");
+                value = URLEncoder.encode(value, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                // 如果编码失败，打印错误并保留原始值
+                System.err.println("URL 编码失败: " + e.getMessage());
+            }
             params.put(key, value);
         }
-
         return params;
     }
+
+    /**
+     * 对b=1&a=2按key的字典序进行排序并返回  --->   a=2&b=1
+     *
+     * @param query
+     * @return
+     */
+    private static String sorted(String query) {
+        String[] split = query.split("&");
+        Arrays.sort(split, (o1, o2) -> {
+            String[] split1 = o1.split("=");
+            String[] split2 = o2.split("=");
+            return split1[0].compareTo(split2[0]);
+        });
+
+        return String.join("&", split);
+    }
+
 }

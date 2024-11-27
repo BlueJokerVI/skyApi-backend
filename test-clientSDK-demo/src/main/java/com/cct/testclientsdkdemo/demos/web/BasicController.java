@@ -18,7 +18,9 @@ package com.cct.testclientsdkdemo.demos.web;
 
 import com.cct.skyapiclientsdk.client.ApiClient;
 import com.cct.skyapiclientsdk.model.req.GetReq;
+import com.cct.skyapiclientsdk.model.req.IPReq;
 import com.cct.skyapiclientsdk.model.resp.BaseResponse;
+import com.cct.skyapiclientsdk.model.resp.IPInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +33,12 @@ public class BasicController {
     private ApiClient apiClient;
 
     @GetMapping("/get")
-    public BaseResponse<String> testSDK() {
-        GetReq req = new GetReq();
-        req.setNumber(11L);
-        BaseResponse<String> test = apiClient.getTest(req);
-        System.out.println(test);
-        return test;
+    public BaseResponse<IPInfo> testSDK() {
+        IPReq req = new IPReq();
+        req.setIp("203.15.246.0");
+        BaseResponse<IPInfo> ipInfo = apiClient.getIpInfo(req);
+        System.out.println(ipInfo);
+        return ipInfo;
     }
 
 }
