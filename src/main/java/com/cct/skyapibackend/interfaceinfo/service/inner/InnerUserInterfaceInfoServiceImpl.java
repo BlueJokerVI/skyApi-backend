@@ -25,7 +25,7 @@ public class InnerUserInterfaceInfoServiceImpl implements InnerUserInterfaceInfo
     private UserInterfaceInfoDao userInterfaceInfoDao;
 
 
-    //TODO 了解SpringELUtils 表达式解析
+
     @Override
     @RedissonLock(key = "#interfaceId+'_'+#userId")
     public Boolean addInvokeTime(Long interfaceId, Long userId) {

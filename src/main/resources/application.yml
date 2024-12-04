@@ -1,12 +1,9 @@
 spring:
   profiles:
     #运行的环境
-    active: test
+    active: prod
   application:
     name: skyapi
-  mvc:
-    pathmatch:
-      matching-strategy: ANT_PATH_MATCHER  #knif4j处理使用
   datasource:
     url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${skyapi.mysql.username}
@@ -88,17 +85,6 @@ oss:
   secretKey: ${skyapi.oss.secretKey}
   bucketName: ${skyapi.oss.bucketName}
 
-# AI调用
-ai:
-  apiSecretKey: ${skyapi.ai.apiSecretKey}
-
-# skyApi
-sky-api:
-  client:
-    access-key: 8e5b1a20360b4592b7f8ebd10e2731df
-    secret-key: e098873dbbd047d08a78c0e8fd69f49d
-    uid: 1854793399153057794
-
 # dubbo
 dubbo:
   application:
@@ -110,3 +96,23 @@ dubbo:
   protocol:
     name: tri
     port: 50051
+
+# Knife4j配置
+knife4j:
+  # 开启增强配置
+  enable: true
+  #开启Basic登录认证功能
+  openapi:
+    title: skyApi-backend
+    description: "redMeat"
+    email: 1545860023@qq.com
+    concat: redMeat  # 作者
+    url: http://xx.com
+    version: v1.0 # 版本号
+    license: Apache 2.0
+    group:
+      test1:
+        group-name: 默认分组
+        api-rule: package
+        api-rule-resources:
+          - com.cct.skyapibackend
