@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    #运行的环境
+    active: prod
+  application:
+    name: skyapi-intefaceImpl
+  datasource:
+    url: jdbc:mysql://${skyapi.mysql.ip}:${skyapi.mysql.port}/${skyapi.mysql.db}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${skyapi.mysql.username}
+    password: ${skyapi.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    # Redis服务器地址
+    host: ${skyapi.redis.host}
+    # Redis服务器端口号
+    port: ${skyapi.redis.port}
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    # 设置密码
+    password: ${skyapi.redis.password}
+  # 使用redis实现分布是session
+  session:
+    store-type: none
+    timeout: 2592000 #30天过期
+  jackson:
+    # 配置Date类型序列化格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+server:
+  address: 0.0.0.0
+  port: 8889
+  servlet:
+    # 所有请求加上api前缀
+    context-path: /api
+
+# Knife4j配置
+knife4j:
+  # 开启增强配置
+  enable: true
+  #开启Basic登录认证功能
+  openapi:
+    title: skyApi-interfaceImpl
+    description: "redMeat"
+    email: 1545860023@qq.com
+    concat: redMeat  # 作者
+    url: http://xx.com
+    version: v1.0 # 版本号
+    license: Apache 2.0
+    group:
+      test1:
+        group-name: 默认分组
+        api-rule: package
+        api-rule-resources:
+          - com.cct.skyapiinterfaceimpl
+

@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    #运行的环境
+    active: prod
+  redis:
+    # Redis服务器地址
+    host: ${skyapi.redis.host}
+    # Redis服务器端口号
+    port: ${skyapi.redis.port}
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    # 设置密码
+    password: ${skyapi.redis.password}
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: api_router
+          uri: http://localhost:8889
+          predicates:
+            - Path=/api/**
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+
+# dubbo
+dubbo:
+  application:
+    logger: slf4j
+    name: skyApiApplication
+  registry:
+    address: nacos://localhost:8848?username=nacos&password=nacos
+    register-mode: instance # 新用户请设置此值，表示启用应用级服务发现，可选值 interface、instance、all，默认值为 all，未来版本将切换默认值为 instance
+  protocol:
+    name: tri
+    port: 50051
