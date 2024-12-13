@@ -48,9 +48,6 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
     private static final String INTERFACE_HOST = "http://localhost:8889";
 
 
-    private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
-
-
     @DubboReference
     private InnerInterfaceInfoService innerInterfaceInfoService;
 
@@ -79,11 +76,6 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         log.info("请求来源地址：" + sourceAddress);
         log.info("请求来源地址：" + request.getRemoteAddress());
         ServerHttpResponse response = exchange.getResponse();
-        // 2. 访问控制 - 黑白名单
-        if (!IP_WHITE_LIST.contains(sourceAddress)) {
-            response.setStatusCode(HttpStatus.FORBIDDEN);
-            return response.setComplete();
-        }
 
         //3. 用户鉴权（判断 ak、sk 是否合法）
         HttpHeaders headers = request.getHeaders();

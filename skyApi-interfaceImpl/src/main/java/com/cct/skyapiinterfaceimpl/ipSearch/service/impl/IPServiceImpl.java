@@ -1,14 +1,16 @@
 package com.cct.skyapiinterfaceimpl.ipSearch.service.impl;
 
-import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.core.io.IoUtil;
 import com.cct.skyapicommon.domain.enums.RespCodeEnum;
 import com.cct.skyapicommon.exception.BusinessException;
 import com.cct.skyapiinterfaceimpl.ipSearch.model.IPInfo;
 import com.cct.skyapiinterfaceimpl.ipSearch.service.IPService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.lionsoul.ip2region.xdb.Searcher;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-
+import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -26,14 +28,14 @@ public class IPServiceImpl implements IPService {
 
     IPServiceImpl() {
         ClassPathResource resource = new ClassPathResource(XDB_PATH);
-        String absolutePath = resource.getAbsolutePath();
-        // 1、从 absolutePath 加载整个 xdb 到内存。
-        byte[] cBuff;
-        try {
-            cBuff = Searcher.loadContentFromFile(absolutePath);
+
+        byte[] cBuff = new byte[0];
+        // 通过 InputStream 读取资源文件
+        try (InputStream inputStream = resource.getInputStream()) {
+            cBuff = IoUtil.readBytes(inputStream);
+            searcher = Searcher.newWithBuffer(cBuff);
         } catch (Exception e) {
-            log.error("IPServiceImpl failed to load content from {}: %s\n", absolutePath, e);
-            return;
+            log.error("IPServiceImpl failed to load content or create searcher: %s\n", e);
         }
 
         try {

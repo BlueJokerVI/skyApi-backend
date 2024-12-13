@@ -41,4 +41,14 @@ public class BasicController {
         return ipInfo;
     }
 
+
+    @GetMapping("/test")
+    public BaseResponse<String> test() {
+        GetReq req = new GetReq();
+        req.setNumber(9999L);
+        BaseResponse<String> res = apiClient.getTest(req);
+        System.out.println(res);
+        return res;
+    }
+
 }
